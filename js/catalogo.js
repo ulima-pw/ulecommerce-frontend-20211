@@ -1,20 +1,9 @@
 var modalCrearVideojuego;
 var data = {
-    videojuegos : [{
-        id : 1,
-        nombre : "Mortal Kombat 11",
-        categoria : "Peleas",
-        precio : 40
-    },{
-        id : 2,
-        nombre : "Resident Evil 4",
-        categoria : "Survival Horror",
-        precio : 45
-    }],
-    categorias : [
-        "Peleas", "Survival Horror", "FPS", "RTS"
-    ]
+    videojuegos : null,
+    categorias : null
 }
+const URL_SERVICIO = "https://script.google.com/macros/s/AKfycbxA2iW6e4f8IMlrIHIG_s1aRYDZDkhuKX1oKFARFFGe1du3fDM/exec";
 
 const butAgregarOnClick = () => {
     modalCrearVideojuego.toggle();
@@ -91,8 +80,8 @@ const cargarSelectCategorias = () => {
 
     for (let categoria of listaCategorias) {
         const option = document.createElement("option");
-        option.setAttribute("value", categoria);
-        option.innerText = categoria;
+        option.setAttribute("value", categoria.id);
+        option.innerText = categoria.nombre;
 
         select.appendChild(option);
     }
@@ -116,7 +105,25 @@ const crearMensajeError = () => {
     divMensajes.appendChild(divAlert);
 }
 
-const main = () => {
+const cargarDataVideojuegos = async () => {
+    const response = await fetch(URL_SERVICIO)
+    const json = await response.json()
+    
+    data.videojuegos = json;
+}
+
+const cargarDataCategorias = async () => {
+    const response = await fetch(URL_SERVICIO + "?entity=categorias");
+    const json = await response.json()
+    console.log(json)
+    data.categorias = json;
+}
+
+const main = async () => {
+    // Cargar data
+    await cargarDataVideojuegos();
+    await cargarDataCategorias();
+
     // Inicializar el modal
     const divModal = document.querySelector("#modal_crear_videojuego");
     modalCrearVideojuego = new bootstrap.Modal(divModal)
