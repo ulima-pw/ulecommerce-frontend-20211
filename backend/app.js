@@ -1,4 +1,5 @@
 const express = require('express')
+const getVideojuegos = require('./models/dao_videojuegos')
 
 const app = express()
 const PORT = 3000
@@ -8,6 +9,13 @@ app.set('view engine', 'ejs') // configurar ejs template
 
 app.get('/', (req, res)=> {
     res.render('index')
+})
+
+app.get('/catalogo', (req, res) => {
+    const listaVideojuegos = getVideojuegos()
+    res.render('catalogo', {
+        videojuegos : listaVideojuegos
+    })
 })
 
 app.listen(PORT, ()=> {
