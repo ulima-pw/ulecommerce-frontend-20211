@@ -3,11 +3,15 @@
     <head>
         <link href="/styles/catalogo.css" rel="stylesheet" type="text/css" />
         <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="/styles/index.css" rel="stylesheet"  />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
         <script src="/js/bootstrap.bundle.js"></script>
     </head>
 
     <body class="container">
-        <h1>Catálogo de videojuegos</h1>
+        <%- include('header') %>
+        <h2>Catálogo de videojuegos</h2>
         <button id="but_agregar" class="btn btn-success mb-3" type="button">+</button>
         <table class="table table-hover">
             <thead>
