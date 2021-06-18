@@ -35,8 +35,8 @@ app.get('/', (req, res)=> {
     
 })
 
-app.get('/catalogo', (req, res) => {
-    const listaVideojuegos = getVideojuegos()
+app.get('/catalogo', async (req, res) => {
+    const listaVideojuegos = await getVideojuegos()
     res.render('catalogo', {
         videojuegos : listaVideojuegos
     })
