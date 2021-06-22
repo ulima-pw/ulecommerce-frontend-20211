@@ -14,10 +14,23 @@ const db = require('../sequelize/models')
 
 
 const getVideojuegos = async () => {
-    // TODO: BD
     const vgs = await db.Videogame.findAll();
-    console.log(vgs);
-    return vgs;
+    const videogames = []
+    for (let vg of vgs) {
+        videogames.push({
+            id : vg.id,
+            name : vg.name,
+            price : vg.price,
+            // category : await db.Category.findOne({
+            //     where : {
+            //         id : vg.idCategory
+            //     }
+            // })
+            category : await vg.getCategory()
+        })
+    }
+    console.log(videogames);
+    return videogames;
 }
 
 module.exports = getVideojuegos;

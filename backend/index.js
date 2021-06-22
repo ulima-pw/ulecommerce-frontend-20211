@@ -2,11 +2,15 @@ const express = require('express')
 const session = require('express-session')
 const getVideojuegos = require('./models/dao_videojuegos')
 const bodyParser = require('body-parser')
+const path = require('path');
 const app = express()
 const PORT = 3000
 
-app.use(express.static('assets')) // configurar archivos estaticos
+app.use(express.static(path.join(__dirname, 'assets'))) // configurar archivos estaticos
+
 app.set('view engine', 'ejs') // configurar ejs template
+app.set('views', path.join(__dirname, '/views')) // configurar ruta para directorios de views
+
 app.use(bodyParser.json()) // para trabajar con formularios
 app.use(bodyParser.urlencoded({
     extended : true
@@ -16,7 +20,7 @@ app.use(session({
     resave : false,
     saveUninitialized : false
 })) // configurando el manejo de sesiones
-
+ 
 app.get('/', (req, res)=> {
     // Valido si hay un usuario en la sesion
     if (req.session.usuario != null) {
