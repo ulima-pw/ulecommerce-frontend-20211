@@ -33,4 +33,42 @@ const getVideojuegos = async () => {
     return videogames;
 }
 
-module.exports = getVideojuegos;
+const getVideojuego = async (vjId) => {
+    const vj = await db.Videogame.findOne({
+        where : {
+            id : vjId
+        }
+    })
+    return vj;
+}
+
+const createVideojuego = async (vj) => {
+    return await db.Videogame.create(vj)
+}
+
+const updateVideojuego = async (vj) => {
+    const vjAEditar = await getVideojuego(vj.id)
+    vjAEditar.name = vj.name
+    vjAEditar.price = vj.price
+    vjAEditar.idCategory = vj.idCategory
+    await vjAEditar.save()
+
+    return true
+}
+
+const deleteVideojuego = async (idVj) => {
+    await db.Videogame.destroy({
+        where : {
+            id : idVj
+        }
+    })
+    return true;
+}
+
+module.exports = {
+    getVideojuegos : getVideojuegos,
+    createVideojuego : createVideojuego,
+    deleteVideojuego : deleteVideojuego,
+    getVideojuego : getVideojuego,
+    updateVideojuego : updateVideojuego
+}

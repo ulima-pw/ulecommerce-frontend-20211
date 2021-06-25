@@ -12,7 +12,7 @@
     <body class="container">
         <%- include('header') %>
         <h2>Catálogo de videojuegos</h2>
-        <button id="but_agregar" class="btn btn-success mb-3" type="button">+</button>
+        <a href="/catalogo/add" id="but_agregar" class="btn btn-success mb-3" type="button">+</a>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -20,6 +20,7 @@
                     <th>Nombre</th>
                     <th>Categoría</th>
                     <th>Precio</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="data_videojuegos">
@@ -29,6 +30,10 @@
                         <td><%= vj.name %></td>
                         <td><%= vj.category.name %></td>
                         <td><%= vj.price %></td>
+                        <td>
+                            <a href="/catalogo/edit/<%= vj.id %>">Editar</a>
+                            <a href="/catalogo/delete/<%= vj.id %>">Eliminar</a>
+                        </td>
                     </tr>
                 <% }) %>
             </tbody>
