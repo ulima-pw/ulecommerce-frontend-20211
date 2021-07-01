@@ -7,6 +7,7 @@ const { getVideojuegos,
         updateVideojuego
      } = require('./models/dao_videojuegos')
 const restCategoria = require('./rest/categoria');
+const restVideojuego = require('./rest/videojuego');
 
 const bodyParser = require('body-parser')
 const path = require('path');
@@ -131,6 +132,11 @@ app.delete('/categoria', restCategoria.delete);
 app.get('/categoria', restCategoria.getAll); // lista de categorias
 
 // Definiendo recurso Videojuego (path = /videojuego)
+app.get('/videojuego/:id', restVideojuego.get);
+app.post('/videojuego', restVideojuego.post);
+app.put('/videojuego', restVideojuego.put);
+app.delete('/videojuego', restVideojuego.delete);
+app.get('/videojuego', restVideojuego.getAll);
 
 app.listen(PORT, ()=> {
     console.log(`Servidor ejecutandose en el puerto ${PORT}`)
