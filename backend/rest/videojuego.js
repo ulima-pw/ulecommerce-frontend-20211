@@ -5,7 +5,7 @@ const resource = {
     post : (req, resp) => {},
     put : (req, resp) => {},
     delete : (req, resp) => {},
-    getAll : (req, resp) => {
+    getAll : async (req, resp) => {
         const listaVideojuegos = await getVideojuegos()
         resp.send(listaVideojuegos);
     },
